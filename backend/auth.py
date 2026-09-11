@@ -6,7 +6,10 @@ import os
 import time
 from typing import Optional
 
+from dotenv import load_dotenv
 from fastapi import Depends, Header, HTTPException
+
+load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-change-me")
 TOKEN_TTL = 60 * 60 * 24  # 24 hours

@@ -12,7 +12,6 @@ data/*.db-shm
 
 # Env files
 .env
-.env.*
 
 # Node
 node_modules/

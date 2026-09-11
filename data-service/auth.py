@@ -1,7 +1,10 @@
 import hashlib
 import os
 
+from dotenv import load_dotenv
 from fastapi import Depends, Header, HTTPException, status
+
+load_dotenv()
 
 API_KEY = os.getenv("API_KEY", "dev-shared-key-change-me")
 

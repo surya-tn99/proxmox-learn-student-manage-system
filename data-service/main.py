@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from typing import List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, status

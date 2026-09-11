@@ -1,7 +1,10 @@
 import os
 
 import httpx
+from dotenv import load_dotenv
 from fastapi import HTTPException
+
+load_dotenv()
 
 DB_API_URL = os.getenv("DB_API_URL", "http://127.0.0.1:8001")
 API_KEY = os.getenv("API_KEY", "dev-shared-key-change-me")
