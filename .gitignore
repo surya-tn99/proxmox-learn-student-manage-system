@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# SQLite data files
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Env files
+.env
+.env.*
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Playwright
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/.playwright/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
