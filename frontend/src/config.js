@@ -11,7 +11,7 @@ export const config = {
     externalFrontend: `http://${PROXMOX_IP}:8011`,
 
     // Backend API accessed via Proxmox IP port 8012
-    externalBackend: `http://${PROXMOX_IP}:8012/api`,
+    externalBackend: `http://${PROXMOX_IP}:8012`,
 
     // Internal database URL (for reference, not typically called directly from browser)
     internalDatabase: `http://10.10.10.13:8001`
