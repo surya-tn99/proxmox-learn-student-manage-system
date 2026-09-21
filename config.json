@@ -1,0 +1,27 @@
+{
+  "proxmox_ip": "10.161.50.66",
+
+  "services": {
+    "frontend": {
+      "internal_ip": "10.10.10.11",
+      "internal_port": 5173,
+      "nginx_port": 8011
+    },
+    "backend": {
+      "internal_ip": "10.10.10.12",
+      "internal_port": 8000,
+      "nginx_port": 8012
+    },
+    "database": {
+      "internal_ip": "10.10.10.13",
+      "internal_port": 8001,
+      "nginx_port": 8013
+    }
+  },
+
+  "urls_template": {
+    "external_frontend": "http://PROXMOX_IP:8011",
+    "external_backend": "http://PROXMOX_IP:8012/api",
+    "internal_database": "http://10.10.10.13:8001"
+  }
+}
