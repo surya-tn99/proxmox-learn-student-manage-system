@@ -1,17 +1,27 @@
-import os
-
+import json
+from pathlib import Path
 import httpx
-from dotenv import load_dotenv
 from fastapi import HTTPException
 
-load_dotenv()
+# Resolve config.json relative to this script's location
+SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent  # Goes up from backend/ to project root
+CONFIG_FILE = PROJECT_ROOT / 'config.json'
 
-DB_API_URL = os.getenv("DB_API_URL", "http://127.0.0.1:8001")
-API_KEY = os.getenv("API_KEY", "dev-shared-key-change-me")
+with open(CONFIG_FILE, 'r') as f:
+    RAW = json.load(f)
+
+# Database API URL from config.json (data-service IP and port)
+# data-service runs on VM 10.10.10.13:8001
+DB_API_URL = RAW['services']['database']['internal_ip'] + ':' + str(RAW['services']['database']['internal_port'])
+
+# Extract just the IP:port format
+DB_API_URL = f"http://{RAW['services']['database']['internal_ip']}:{RAW['services']['database']['internal_port']}"
+
+API_KEY = "dev-shared-key-change-me"  # Default, or read from config if needed
 
 _client = httpx.Client(
     base_url=DB_API_URL,
-    headers={"X-API-Key": API_KEY},
     timeout=10.0,
 )
 
