@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-// Resolve config.json from project root (two levels up from src/)
-const PROJECT_ROOT = path.resolve('/home/kuttypuli/Projects/mini2-student-manage');
+// Resolve config.json relative to this source file
+// __dirname is the directory of the current module (src/)
+// Going up two levels: src/ -> project/ -> config.json
+const PROJECT_ROOT = path.resolve(__dirname, '../..');
 const RAW = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, 'config.json'), 'utf-8'));
 
 // Proxmox IP from config (hardcoded, no env file needed)

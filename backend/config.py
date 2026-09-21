@@ -2,8 +2,10 @@ import json
 import os
 from pathlib import Path
 
-# Resolve config.json from project root
-PROJECT_ROOT = Path('/home/kuttypuli/Projects/mini2-student-manage')
+# Resolve config.json relative to this script's location
+# __file__ gives the path to config.py, we go up one level to project root
+SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent  # Goes up from backend/ to project root
 CONFIG_FILE = PROJECT_ROOT / 'config.json'
 
 with open(CONFIG_FILE, 'r') as f:
