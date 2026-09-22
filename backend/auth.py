@@ -1,16 +1,17 @@
-import base64
-import hashlib
-import hmac
 import json
 import os
-import time
-from typing import Optional
-
-from dotenv import load_dotenv
+from pathlib import Path
 from fastapi import Depends, Header, HTTPException
 
-load_dotenv()
+# Resolve config.json relative to this script's location
+SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent  # Goes up from backend/ to project root
+CONFIG_FILE = PROJECT_ROOT / 'config.json'
 
+with open(CONFIG_FILE, 'r') as f:
+    RAW = json.load(f)
+
+API_KEY = RAW['api_key']  # Read from config.json (no env file needed)
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-change-me")
 TOKEN_TTL = 60 * 60 * 24  # 24 hours
 
@@ -63,3 +64,12 @@ def require_admin(user: dict = Depends(get_current_user)) -> dict:
     if user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Admin privileges required")
     return user
+
+
+def require_api_key(x_api_key: str = Header(None)) -> str:
+    if x_api_key != API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid API key",
+        )
+    return x_api_key

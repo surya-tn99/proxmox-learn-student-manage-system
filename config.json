@@ -23,5 +23,6 @@
     "external_frontend": "http://PROXMOX_IP:8011",
     "external_backend": "http://PROXMOX_IP:8012/api",
     "internal_database": "http://10.10.10.13:8001"
-  }
+  },
+  "api_key": "dev-shared-key-change-me"
 }
